@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "4661a63a-bf40-45d5-961c-a69b9966032b",
+		"name": "MK_Group",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23264657"
+	},
+	"item": [
+		{
+			"name": "Создание нового питомца",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var libraryLink = 'https://gist.githubusercontent.com/kentkost/f2699eb1dd41e2eb6203f0d0c77a987e/raw/bffae74aa3827ea195c10cf83bce4d78017bdf2d/postman-bigint.js'\r",
+							"\r",
+							"const _dummy = setInterval(() => {}, 300000);\r",
+							"\r",
+							"function sendRequest(req) {\r",
+							"    return new Promise((resolve, reject) => {\r",
+							"        pm.sendRequest(req, (err, res) => {\r",
+							"            if (err) {\r",
+							"                return reject(err);\r",
+							"            }\r",
+							"\r",
+							"            return resolve(res);\r",
+							"        })\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"(async function main() {\r",
+							"    let result1 = await sendRequest(libraryLink);\r",
+							"    eval(result1.text());   \r",
+							"    \r",
+							"    let newObj = JSON.parse(responseBody);\r",
+							"    pm.environment.set(\"petId\", newObj.id);\r",
+							"    clearInterval(_dummy)\r",
+							"})();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"home_animals\"\r\n  },\r\n  \"name\": \"dog\",\r\n  \"photoUrls\": [\r\n    \"https://yandex.ru/images/search?pos=10&img_url=http%3A%2F%2Fkrasivosti.pro%2Fuploads%2Fposts%2F2021-04%2F1618155031_11-p-sobachki-malenkie-smeshnie-sobaki-krasivo-11.jpg&text=фото%20собачек&lr=2&rpt=simage&source=serp\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"shaggy\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос питомца",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'https://petstore.swagger.io/v2/pet',\r",
+							"    method: 'PUT',\r",
+							"    body: {\r",
+							"    \"id\": \"petId\",\r",
+							"    \"category\": {\r",
+							"        \"id\": 0,\r",
+							"        \"name\": \"string\"\r",
+							"    },\r",
+							"    \"name\": \"doggie\",\r",
+							"    \"photoUrls\": [\r",
+							"        \"string\"\r",
+							"    ],\r",
+							"    \"tags\": [\r",
+							"        {\r",
+							"            \"id\": 0,\r",
+							"            \"name\": \"string\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"status\": \"sold\"\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    console.log(res);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{petId}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{petId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение питомца",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9223372036854634663,\r\n    \"category\": {\r\n        \"id\": 1,\r\n        \"name\": \"home_animals\"\r\n    },\r\n    \"name\": \"dog\",\r\n    \"photoUrls\": [\r\n        \"https://yandex.ru/images/search?pos=10&img_url=http%3A%2F%2Fkrasivosti.pro%2Fuploads%2Fposts%2F2021-04%2F1618155031_11-p-sobachki-malenkie-smeshnie-sobaki-krasivo-11.jpg&text=фото%20собачек&lr=2&rpt=simage&source=serp\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 0,\r\n            \"name\": \"shaggy\"\r\n        }\r\n    ],\r\n    \"status\": \"sold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "PetId",
+			"value": ""
+		}
+	]
+}

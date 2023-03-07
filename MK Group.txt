@@ -1,0 +1,36 @@
+SELECT
+Orders.CustomerID,
+Customers.CustomerName,
+COUNT (DISTINCT Orders.OrderID) AS Cnt,
+MAX (Orders.OrderDate) AS LastDate
+FROM
+Customers
+JOIN
+Orders ON Orders.CustomerID = Customers.CustomerID
+GROUP BY
+Customers.CustomerName
+HAVING Cnt > 5
+ORDER BY
+Cnt DESC;
+
+
+$ echo -e '\nau\nhh\nha\nfa\njj\nkl\nlp\nat\nfa' > text.txt
+
+$ grep -i [a] text.txt | wc -l
+
+Добрый день. Меня зовут Андрей Колодяжный.
+Резюме HH:
+Направляю Вам выполненное задание.
+1. Чек-листы https://docs.google.com/spreadsheets/d/1CXygCVhGlHkpvfQ5cDHJtP9KV243ZxqP/edit?usp=sharing&ouid=104279470697601092292&rtpof=true&sd=true
+
+Отчет
+https://docs.google.com/spreadsheets/d/1CXygCVhGlHkpvfQ5cDHJtP9KV243ZxqP/edit#gid=1713267869
+
+2.в приложении
+С автоматизацией я пока не сильно знаком, поэтому во втором задании написать скрипт, я не смог.
+
+Надеюсь моя кандидатура будет интересна вашей компании.
+Если, все же, я не подхожу, прошу Вас дать обратную связь из-за чего я не подошел. Это поможет мне в будущем.
+Спасибо.
+
+С уважением, Андрей Колодяжный.
